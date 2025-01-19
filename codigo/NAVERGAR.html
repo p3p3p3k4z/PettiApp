@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>   
+    <title>Login</title>
+</head>
+<body class="container w-105 min-h-screen flex items-center flex-col justify-center">
+    <!--contenedor bonito-->
+    <div class="bg-slate-200 m-8 flex items-center justify-center flex-col shadow-2xl ">
+    <!--Hacer el ingreso de ususrio-->
+    <label class="m-14 block">
+        <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+          Usuario
+        </span>
+        <input type="text" name="usuario" class="mt-1 px-12 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Ingresa tu usuario" />
+      </label>
+      <!--Hacer el ingreso de contraseña-->
+      <label class="m-10 block">
+        <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+          Contraseña
+        </span>
+        <input type="password" name="contraseña" class="mt-1 px-12 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Ingresa tu contraseña" />
+      </label>
+      <!--boton aceptar-->
+      <label class="block">
+        <button class="m-4 bg-sky-300 hover:bg-sky-500 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 py-3 px-6 rounded-full text-white font-semibold text-lg">
+            Aceptar
+        </button>
+    </div>
+      
+    
+</body >
+</html>

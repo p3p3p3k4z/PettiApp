@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  # MySQL Service
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: my_database
+      MYSQL_USER: mysql_user
+      MYSQL_PASSWORD: mysql_password
+    ports:
+      - "3316:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+      - ./data:/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # PhpMyAdmin Service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin_container
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: mysql_user
+      PMA_PASSWORD: mysql_password
+    ports:
+      - "8086:80"
+    depends_on:
+      - mysql
+
+  # Apache with PHP Service
+  apache:
+    image: php:8.2-apache
+    container_name: apache_container
+    volumes:
+      - ./www:/var/www/html
+    ports:
+      - "8085:80"
+    depends_on:
+      - mysql
+
+  # Node.js App Service
+  app:
+    build: .
+    container_name: ubuntu-nodejs
+    stdin_open: true
+    tty: true
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./codigo:/codigo
+    depends_on:
+      - mysql
