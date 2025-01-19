@@ -35,7 +35,7 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 ---
-#SQL
+# SQL
 
 ### Entrar a sql
 docker exec -it mysql-secure mysql -u root
