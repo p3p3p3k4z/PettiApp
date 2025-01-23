@@ -1,0 +1,66 @@
+nav{
+    background-color: black;
+    border-bottom: black 1px solid;
+    z-index: 999999;
+}
+.nav-item{
+    width: 4vw;
+    text-align: center;
+}
+.nav-item:hover{
+    background-color: rgb(255, 255, 255);
+    border-radius: 1em;
+}
+#panel{
+    width: 100vw;
+    height: 90.85vh;
+    background-image: url("img/tablero.png");
+    background-size: cover;
+}
+
+.post-it{
+    display: inline-block;
+    padding:0.5rem;
+    width: 15vw;
+    height: auto;
+    border-radius: 0.2rem;
+    background: linear-gradient(to bottom, rgb(253, 255, 158), rgb(255, 251, 43));
+    border:0.08rem solid black;
+}
+
+.modal{
+    top:25%;
+}
+
+.title{
+    word-wrap: break-word;
+    border-bottom: 1px solid black;
+}
+
+.text{
+    word-wrap: break-word;
+}
+
+.tiempo{
+    text-align: center;
+    color: rgb(255, 0, 0);
+}
+
+#color1{
+    width: 100%;
+}
+
+
+#color2{
+    width: 100%;
+}
+
+#preview {
+    border:1px solid #ddd;
+    padding:5px;
+    border-radius:2px;
+    background:#fff;
+    max-width:200px;
+  }
+  
+  #preview img {width:100%;display:block;}
