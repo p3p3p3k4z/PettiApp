@@ -1,0 +1,3 @@
+Para darle permiso a la tabla productos,ejecutar en sql:
+GRANT DELETE ON insumos.productos TO 'root'@'localhost';
+FLUSH PRIVILEGES;

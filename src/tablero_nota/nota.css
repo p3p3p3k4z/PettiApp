@@ -1,0 +1,81 @@
+body {
+  background-image: url("img/tablero.png");
+  background-size: 70%;
+  background-position: contain; /* Centra la imagen en la pantalla */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+}
+
+#panel {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("img/tablero.png");
+  background-size: 2000px 1000px; 
+  background-position: center ; /* Centra la imagen en el panel */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+}
+
+
+nav{
+  background-color: black;
+  border-bottom: black 1px solid;
+  z-index: 999999;
+  position: fixed;
+}
+
+.nav-item{
+  width: 4vw;
+  text-align: center;
+}
+
+.nav-item:hover{
+  background-color: rgb(255, 255, 255);
+  border-radius: 1em;
+}
+
+.postit{
+  position:absolute;
+  width:15vw;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 0.2rem;
+  transform: rotate(-3deg);
+  background: linear-gradient(to bottom, rgb(253, 255, 158), rgb(255, 251, 43));
+  border:1px solid black;
+}
+
+a.fa:hover{
+  color: aqua;
+}
+
+.modal{
+  top:25%;
+}
+
+.titulo{
+  border-bottom: 1px black solid;
+  word-wrap: break-word;
+}
+
+.fecha{
+  text-align: center;
+  color: brown;
+  margin: 0;
+}
+
+.dropdown-menu a:hover{
+  background-color: rgb(172, 16, 16);
+}
+#dropdownMenu a:hover{
+  color:  rgb(0, 0, 0);
+}
+.dropdown-item{
+  color:rgb(172, 16, 16);
+}
+
+.nav-link{
+  color:rgb(172, 16, 16);
+}
+
+.nav-link:hover{
+  color:rgb(172, 16, 16);
+}
