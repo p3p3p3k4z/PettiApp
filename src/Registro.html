@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/Registro.css">
+</head>
+<body>
+    <nav class="menu-min">
+        <a href="./Index.html">
+            <img src="images/peti/logo.png" style="background-color: transparent;" width="80" height="50" alt="">
+        </a>
+        <h1 style="width: 980px;"></h1>
+        <a href="./Login.html" class="menu-min-item">Iniciar sesión</a>
+    </nav>
+    <div class="container">
+        <div class="login-container">
+            <form id="loginForm">
+
+                <h2>Hola, Vamos a crear una cuenta!</h2>
+                <div>
+                    <div class="input-firstName" id="input-firstName">
+                        <input type="text" id="firstName" name="firstName" placeholder="Ingresa tu nombre" required>
+                        <button type="button" id="nextBtn1" class="next-btn">Siguiente</button>
+                    </div>
+                    <span class="error-message" id="firstNameError">Por favor, ingresa tu nombre.</span>
+                </div>
+                <div>
+                    <div class="input-password" id="input-password">
+                        <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+                        <button type="button" id="nextBtn2" class="next-btn">Siguiente</button>
+                    </div>
+                    <span class="error-message" id="passwordNameError">Por favor, ingresa tu contraseña.</span>
+                </div>
+                <div>
+                    <div class="input-age" id="input-age">
+                        <input type="number" id="age" name="age" placeholder="Ingresa tu edad" required min="18" max="65">
+                        <button type="button" id="nextBtn3" class="next-btn">Siguiente</button>
+                    </div>
+                    <span class="error-message" id="ageError">Por favor, ingresa una edad válida entre 18 y 65 años.</span>
+                </div>
+                <div>
+                    <div class="input-phone" id="input-phone">
+                        <input type="text" id="phone" name="phone" placeholder="Ingresa tu teléfono" required>
+                        <button type="button" id="nextBtn4" class="next-btn">Siguiente</button>
+                    </div>
+                    <span class="error-message" id="phoneError">Por favor, ingresa tu número de teléfono.</span>
+                </div>
+                <div>
+                    <div class="input-address" id="input-address">
+                        <input type="text" id="address" name="address" placeholder="Ingresa tu dirección" required>
+                        <button type="button" id="nextBtn5" class="next-btn">Siguiente</button>
+                    </div>
+                    <span class="error-message" id="addressError">Por favor, ingresa tu dirección.</span>
+                </div>
+                <div>
+                    <div class="input-area" id="input-area">
+                        <label for="area">Area</label>
+                        <select id="area" name="area" required>
+                            <option value="">Selecciona un área</option>
+                            <option value="Area1">Cocina</option>
+                            <option value="Area2">Administrador</option>
+                            <option value="Area3">Repartidor</option>
+                            <option value="Area4">Barra</option>
+                        </select>
+                        <button type="button" id="nextBtn6" class="next-btn">Siguiente</button>
+                    </div>
+                    <span class="error-message" id="areaError">Por favor, selecciona un área.</span>
+                </div>
+                
+                <div class="fin" id="fin" style="display: none;">
+                    <h1>Proceso completo</h1>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/Registro.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+mi-proyecto/
+│── docker-compose.yml
+│── Dockerfile
+│── mysql/
+│   ├── init.sql #Crear bd e datos iniciales
+│── src/
+│   ├── index.php
+│   ├── styles.css
+│   ├── otros archivos...
