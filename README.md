@@ -2,6 +2,9 @@
 Esta es una aplicacion web dedicada a administrar la lista de insumos para la cafeteria Petirrojo. En donde los trabajadores podran enlistas los insumos faltantes, consultar los insumos actuales, checar los detalles de los insumos.
 Asi mismo este es un proyecto para las materias de Ing.Software/ProgramacionWeb.
 
+![inicio pagina](./info_proyecto/capturas/inicio.png)
+
+---
 
 #### Docker
 Realizar esta serie de pasos para poder ejecutar el contenedor
@@ -39,4 +42,25 @@ ahora tienes que ver todas las imagenes que haz creado. Ya que proablemente teng
 ```
 docker images
 docker rmi -f ID
+```
+
+---
+### phpadmin
+Para poder administrar la BD, acceder como
+```
+user
+password
+```
+
+---
+
+### git
+Para poder subir el codigo en git realizar lo siguiente
+```bash
+git init
+git add .
+git commit -m "beta integraccion"
+git remote add origin https://github.com/p3p3p3k4z/PettiApp.git
+git checkout -b main
+git push origin main --force
 ```

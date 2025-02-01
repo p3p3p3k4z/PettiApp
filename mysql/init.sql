@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS pedido (
     id INT AUTO_INCREMENT PRIMARY KEY,
     codigo VARCHAR(255) NOT NULL,
     nombre VARCHAR(255) NOT NULL,
-    categoria VARCHAR(255) NOT NULL
+   -- categoria VARCHAR(255) NOT NULL
     cantidad INT NOT NULL DEFAULT 0
 );
 
