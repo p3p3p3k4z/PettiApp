@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/Login.css">
+</head>
+<body>
+    <nav class="menu-min">
+        <a href="./Index.html">
+            <img src="images/peti/logo.png" style="background-color: transparent;" width="80" height="50" alt="Logo">
+        </a>
+    </nav>
+
+    <div class="container">
+        <div class="login-container">
+            <form id="loginForm">
+                <h2>Iniciar sesión</h2>
+
+                <input type="tel" id="phone" name="phone" placeholder="Ingresa tu teléfono" required>
+                <span class="error-message" id="phoneError">Ingresa un número de teléfono válido.</span>
+
+                <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+                <span class="error-message" id="passwordError">La contraseña debe tener entre 4 y 60 caracteres.</span>
+
+                <button type="submit">Iniciar sesión</button>
+                <span class="submiterror" id="submiterror">Número de teléfono o contraseña incorrectos, inténtalo de nuevo.</span>
+
+                <div class="link-1">
+                    <a href="#">¿Olvidaste la contraseña?</a>
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    <label for="rememberMe">Recuérdame</label>
+                </div>
+                <div class="link-2">
+                    <span>¿Primera vez? <a href="./Registro.html" class="subscribe-link">Regístrate ahora.</a></span>
+                </div>
+
+                <div class="captcha-info">
+                    <p>
+                        Esta página está protegida por Google reCAPTCHA para comprobar que no eres un robot. <a href="#">Más info.</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const inputs = document.querySelectorAll('input');
+    const loginForm = document.getElementById('loginForm');
+    const phoneInput = document.getElementById('phone');
+    const passwordInput = document.getElementById('password');
+    const submitError = document.getElementById('submiterror');
+    const submitButton = loginForm.querySelector('button');
+    
+    let failedAttempts = 0;  
+    const maxAttempts = 3;
+    
+    function handleBlur(event) {
+        const input = event.target;
+        const errorMessage = document.getElementById(input.name + 'Error');
+        
+        if (input.value.trim() === '') {
+            errorMessage.style.display = 'block';
+            input.classList.add('error');
+        } else {
+            errorMessage.style.display = 'none';
+            input.classList.remove('error');
+        }
+    }
+
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            const errorMessage = document.getElementById(input.name + 'Error');
+            errorMessage.style.display = 'none';
+            input.classList.remove('error');
+        });
+
+        input.addEventListener('blur', handleBlur);
+    });
+
+    loginForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const phone = phoneInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        // Validación del teléfono: solo números y longitud 10
+        if (!/^\d{10}$/.test(phone)) {
+            alert('El teléfono debe contener 10 dígitos.');
+            return;
+        }
+
+        if (!password || password.length < 4 || password.length > 60) {
+            alert('La contraseña debe tener entre 4 y 60 caracteres.');
+            return;
+        }
+
+        fetch('../php/Login.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ phone, password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = data.redirectUrl;
+            } else {
+                failedAttempts++;
+                submitError.textContent = data.message;
+                submitError.style.display = 'block';
+
+                if (failedAttempts >= maxAttempts) {
+                    submitButton.disabled = true;
+                    alert("Has superado el límite de intentos fallidos.");
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error al hacer la solicitud de login:', error);
+            alert('Hubo un error al intentar iniciar sesión. Por favor, intenta nuevamente más tarde.');
+        });
+    });
+});
+</script>

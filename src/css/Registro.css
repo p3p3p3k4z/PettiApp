@@ -1,0 +1,296 @@
+/* Fondo negro para toda la página */
+body {
+    display:flex;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../images/cafe_stock/granoss.jpg'); /* Reemplaza con la ruta de tu imagen */
+    background-size: cover; /* Ajusta la imagen para que cubra toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-attachment: fixed; /* Fija la imagen al fondo, sin que se desplace al hacer scroll */
+    font-family: Arial, sans-serif;
+}
+
+.menu-min{
+    display: flex;/* Fondo negro para toda la página */
+    body {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url('../images/cafe_stock/granoss.jpg'); /* Reemplaza con la ruta de tu imagen */
+        background-size: cover; /* Ajusta la imagen para que cubra toda la pantalla */
+        background-position: center; /* Centra la imagen */
+        background-attachment: fixed; /* Fija la imagen al fondo, sin que se desplace al hacer scroll */
+        font-family: Arial, sans-serif;
+    }
+    
+    .menu-min {
+        display: flex;
+        justify-content: space-around;
+        background-color: #1b1b1b;
+        height: 50px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+    }
+    
+    .menu-min-item {
+        color: rgb(204, 203, 203);
+        font-size: 14px;
+        text-decoration: none;
+        min-width: 30px;
+        text-align: center;
+        min-height: 20px;
+        margin-top: 17px;
+        margin-bottom: 0px;
+        font-weight: bold;
+    }
+    
+    .menu-min-item:hover {
+        opacity: 55%;
+        color: #ffd49c;
+    }
+    
+    .container {
+        background-color: rgba(0, 0, 0, 0.8);
+        border: 2px solid #444;
+        width: 400px;
+        height: 350px; /* Ajustado para acomodar los 6 inputs */
+        justify-items: center;
+        align-content: center;
+    }
+    
+    .login-container {
+        padding: 20px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        color: white;
+    }
+    
+    /* Estilo de los inputs */
+    .login-container input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd; /* Borde gris por defecto */
+        border-radius: 4px;
+        background-color: transparent;
+        color: white;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease-in-out;
+    }
+    
+    /* Mostrar solo el primer input, ocultar los demás */
+    #firstName {
+        display: block;
+    }
+    
+    #input-password,
+    #input-age,
+    #input-area,
+    #input-address,
+    #input-phone,
+    #fin {
+        display: none;
+    }
+    
+    /* Mostrar el botón junto al primer input */
+    .input-firstName,
+    .input-password,
+    .input-area,
+    .input-address,
+    .input-phone,
+    .input-age {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .next-btn {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    
+    .next-btn:hover {
+        background-color: #0056b3;
+    }
+    
+    .login-container input:focus {
+        border: 4px solid white;
+    }
+    
+    /* Estilo del borde rojo cuando hay error */
+    .login-container input.error {
+        border-color: red;
+    }
+    
+    /* Mensajes de error debajo de los inputs */
+    .error-message {
+        text-align: left;
+        display: none;
+        color: red;
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    
+    /* Estilo adicional para la validación de edad */
+    #ageError {
+        display: none;
+    }
+    
+    /* Mostrar el botón de "Siguiente" y el mensaje de error solo cuando sea necesario */
+    #nextBtn5 {
+        display: block;
+    }
+    
+    /* Asegurar que el input para la edad se vea correctamente */
+    .input-age {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    justify-content: space-around;    
+    background-color: #1b1b1b;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    }
+    
+    .menu-min-item{
+    color: rgb(204, 203, 203);
+    font-size: 14px;
+    text-decoration: none;
+    min-width: 30px;
+    text-align: center;
+    min-height: 20px;
+    margin-top: 17px;
+    margin-bottom: 0px;
+    font-weight: bold;
+    }
+    
+    .menu-min-item:hover {
+        opacity: 55%;
+        color: #ffd49c;
+    }
+
+.container {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid #444;
+    width: 400px;
+    height: 200px; /* Ajusté la altura para adaptarse a 6 inputs */
+    justify-items: center;
+    align-content: center;
+}
+
+.login-container {
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    color: white;
+}
+
+/* Estilo de los inputs */
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd; /* Borde gris por defecto */
+    border-radius: 4px;
+    background-color: transparent;
+    color: white;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Mostrar solo el primer input, ocultar los demás */
+#firstName {
+    display: block;
+}
+
+#input-password,
+#input-area,
+#input-address,
+#input-phone,
+#input-age,
+#fin {
+    display: none;
+}
+
+/* Mostrar el botón junto al primer input */
+.input-firstName,
+.input-password,
+.input-area,
+.input-address,
+.input-age,
+.input-phone{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}   
+
+
+.next-btn{
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.next-btn:hover {
+    background-color: #0056b3;
+}
+
+.login-container input:focus {
+    border: 4px solid white;
+}
+
+/* Estilo del borde rojo cuando hay error */
+.login-container input.error {
+    border-color: red;
+}
+
+/* Mensajes de error debajo de los inputs */
+.error-message {
+    text-align: left;
+    display: none;
+    color: red;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+/* Estilo para el <select> */
+.login-container select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: transparent;
+    color: white;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.login-container select:focus {
+    border: 4px solid white;
+}

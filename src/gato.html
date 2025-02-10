@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gato Aleatorio</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        img {
+            max-width: 90%;
+            max-height: 70vh;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #ff9800;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #e68900;
+        }
+    </style>
+</head>
+<body>
+    <img id="catImage" src="" alt="Gato Aleatorio">
+    <button onclick="loadCat()">Otro gato</button>
+    <button onclick="window.location.href='index.html'">Volver al Inicio</button>
+
+    <script>
+        function loadCat() {
+            fetch('https://api.thecatapi.com/v1/images/search')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('catImage').src = data[0].url;
+                })
+                .catch(error => console.error('Error al cargar la imagen:', error));
+        }
+        window.onload = loadCat;
+    </script>
+</body>
+</html>

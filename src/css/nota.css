@@ -1,0 +1,269 @@
+body {
+  background-image: url("../images/cafe_stock/pexels-juanpphotoandvideo-894695.jpg");
+  background-size: 70%;
+  background-position: contain; /* Centra la imagen en la pantalla */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+}
+
+#panel {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../images/cafe_stock/pexels-juanpphotoandvideo-894695.jpg");
+  background-size: 2000px 1000px; 
+  background-position: center ; /* Centra la imagen en el panel */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+}
+
+
+nav{
+  background-color: black;
+  border-bottom: black 1px solid;
+  z-index: 999999;
+  position: fixed;
+}
+
+.nav-item{
+  width: 4vw;
+  text-align: center;
+}
+
+.nav-item:hover{
+  background-color: rgb(255, 255, 255);
+  border-radius: 1em;
+}
+
+.postit{
+  position:absolute;
+  width:15vw;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 0.2rem;
+  transform: rotate(-3deg);
+  background: linear-gradient(to bottom, rgb(253, 255, 158), rgb(255, 251, 43));
+  border:1px solid black;
+}
+
+a.fa:hover{
+  color: aqua;
+}
+
+.modal{
+  top:25%;
+}
+
+.titulo{
+  border-bottom: 1px black solid;
+  word-wrap: break-word;
+}
+
+.fecha{
+  text-align: center;
+  color: brown;
+  margin: 0;
+}
+
+.dropdown-menu a:hover{
+  background-color: rgb(172, 16, 16);
+}
+#dropdownMenu a:hover{
+  color:  rgb(0, 0, 0);
+}
+.dropdown-item{
+  color:rgb(172, 16, 16);
+}
+
+.nav-link{
+  color:rgb(172, 16, 16);
+}
+
+.nav-link:hover{
+  color:rgb(172, 16, 16);
+}
+
+/*Prueba*/
+
+.postit-todo {
+  position: absolute;
+  width: 220px;
+  min-height: 150px;
+  padding: 15px;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  border-radius: 8px;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+  cursor: move;
+  transform: rotate(2deg);
+  z-index: 100;
+}
+
+.postit-todo ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.postit-todo li {
+  list-style-type: square;
+  margin: 8px 0;
+  word-break: break-word;
+}
+
+.todo-controls {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.todo-controls i {
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.fa-pencil {
+  color: #666 !important;
+}
+
+.fa-trash {
+  color: #ff4444 !important;
+}
+
+.todo-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* Estilos para la To-Do List */
+.todo-note {
+  background-color: #fffacd; /* Color amarillo pastel similar a un Post-It */
+  border: 1px solid #d4af37; /* Borde dorado tenue */
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Sombra para darle efecto flotante */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 15px;
+  width: 250px; /* Tamaño estándar de la nota */
+  min-height: 150px; /* Altura mínima */
+  overflow: hidden;
+  position: absolute;
+}
+
+/* Estilos para la lista de tareas dentro de la To-Do List */
+.todo-note ul {
+  list-style-type: none; /* Eliminar viñetas */
+  padding: 0;
+}
+
+.todo-note li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+/* Checkbox alineado con el texto */
+.todo-note input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* Botón de eliminar To-Do List */
+.todo-note .delete-note {
+  color: #a00; /* Rojo oscuro */
+  font-size: 1.2rem;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.todo-note .delete-note:hover {
+  color: red;
+}
+
+.note-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 10px auto;
+}
+
+.todo-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fdfd96;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  max-width: 200px;
+}
+
+.delete-note {
+  cursor: pointer;
+  color: red;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+
+@media (max-width: 600px) {
+  #panel {
+    background-size: cover; /* Ajusta el tamaño de la imagen para que cubra la pantalla */
+    background-position: center;
+  }
+
+  .nav-item {
+    width: auto; /* Ajusta automáticamente el ancho de los elementos de navegación */
+    padding: 0.5rem;
+    font-size: 1rem; /* Reduce el tamaño del texto */
+  }
+
+  .postit {
+    width: 90%; /* Asegúrate de que los post-its ocupen el ancho disponible */
+    transform: rotate(0); /* Elimina la inclinación para mejor legibilidad en pantallas pequeñas */
+    font-size: 0.8rem; /* Reduce el tamaño del texto dentro de los post-its */
+  }
+
+  .modal {
+    width: 90%; /* Ajusta el modal para que ocupe casi todo el ancho de la pantalla */
+    top: 20%; /* Baja el modal un poco más para que se vea mejor */
+  }
+
+  .titulo {
+    font-size: 1.2rem; /* Ajusta el tamaño del texto del título */
+  }
+
+  .fecha {
+    font-size: 0.9rem; /* Reduce el tamaño del texto de la fecha */
+  }
+}
+
+/* Para pantallas medianas (tabletas) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  #panel {
+    background-size: 1500px 800px; /* Ajusta el tamaño de la imagen para pantallas medianas */
+  }
+
+  .nav-item {
+    width: 6vw; /* Ajusta el ancho de los elementos de navegación */
+    font-size: 1.2rem; /* Ajusta el tamaño del texto */
+  }
+
+  .postit {
+    width: 50%; /* Ajusta los post-its al 50% del ancho de la pantalla */
+    transform: rotate(-2deg); /* Reduce ligeramente la inclinación */
+    font-size: 1rem; /* Ajusta el tamaño del texto dentro de los post-its */
+  }
+
+  .modal {
+    width: 70%; /* Ajusta el tamaño del modal */
+    top: 22%; /* Baja un poco más el modal */
+  }
+
+  .titulo {
+    font-size: 1.5rem; /* Ajusta el tamaño del texto del título */
+  }
+
+  .fecha {
+    font-size: 1rem; /* Ajusta el tamaño del texto de la fecha */
+  }
+}

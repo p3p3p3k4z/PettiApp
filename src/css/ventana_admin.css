@@ -1,0 +1,58 @@
+body {
+    background-color:  #f5f3ea;
+  }
+  /*Barra de inicio*/
+  .navbar-custom {
+    background-color:  #5a212d;
+    margin-top: 15px;
+    height: 10vh;
+    width: 100vw;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.705);
+    margin-bottom: 10px;
+  }
+
+  .navbar-brand {
+      display: flex;
+      align-items: center;
+      color: #ffdabb;
+    }
+
+    .navbar-brand img {
+      margin-right: 10px;
+    }
+    /* Línea de decoración después del div */
+    .linea-separa {
+        height: inline-block;
+        background-color:  #6b4226;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        padding-top: 10px;
+      }
+    /*Fuentes modificas de letra*/
+    .ingrid-darling-regular {
+        font-family: "Ingrid Darling", serif;
+        font-weight: 550;
+        font-style: normal;
+        font-size: 50PX;
+      }
+      .yuji-syuku-regular {
+        font-family: "Yuji Syuku", serif;
+        font-weight: 900;
+        font-style: normal;
+        font-size: large;
+      }
+      .yuji-syuku-regular-2 {
+        font-family: "Yuji Syuku", serif;
+        font-weight: 900;
+        font-style: normal;
+        font-size: 1.15em !important; 
+      }
+
+    .sour-gummy-1 {
+    font-family: "Sour Gummy", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: bold !important;
+    font-variation-settings:50 !important;
+    font-size: 1.1em !important; 
+  }
