@@ -26,12 +26,10 @@ if (isset($_POST['enviar_repartidor'])) {
         }
     }
 
-    // Ahora procesamos los datos enviados en el formulario
+    // Procesar los datos enviados en el formulario
     if (isset($_POST['cantidad'])) {
-        // Recorremos los valores de cantidad enviados
         foreach ($_POST['cantidad'] as $id => $cantidad) {
-            // Asegurarnos de que el ID y la cantidad no estén vacíos
-            if (!empty($id) && !empty($cantidad)) {
+            if (!empty($id) && $cantidad > 0) { 
                 // Recuperar los datos del pedido
                 $query = "SELECT * FROM pedido WHERE id = $id";
                 $result = mysqli_query($conecta, $query);
@@ -41,25 +39,35 @@ if (isset($_POST['enviar_repartidor'])) {
 
                     // Insertar en la tabla 'pedido_final'
                     $insert_query = "INSERT INTO pedido_final (codigo, nombre, cantidad, empleado, categoria) 
-                                     VALUES ('" . mysqli_real_escape_string($conecta, $row['codigo']) . "', '" . mysqli_real_escape_string($conecta, $row['nombre']) . "', " . intval($cantidad) . ", '" . mysqli_real_escape_string($conecta, $row['empleado']) . "', '" . mysqli_real_escape_string($conecta, $row['categoria']) . "')";
+                                     VALUES ('" . mysqli_real_escape_string($conecta, $row['codigo']) . "', 
+                                             '" . mysqli_real_escape_string($conecta, $row['nombre']) . "', 
+                                             " . intval($cantidad) . ", 
+                                             '" . mysqli_real_escape_string($conecta, $row['empleado']) . "', 
+                                             '" . mysqli_real_escape_string($conecta, $row['categoria']) . "')";
                     
                     if (!mysqli_query($conecta, $insert_query)) {
                         echo 'Error al insertar en pedido_final: ' . mysqli_error($conecta);
-                        exit(); // Detener el proceso si hay un error en la inserción
+                        exit();
                     }
                 }
             }
         }
 
+        // **Eliminar todos los registros de la tabla 'pedido'**
+        $delete_query = "DELETE FROM pedido";
+        if (!mysqli_query($conecta, $delete_query)) {
+            echo 'Error al eliminar pedidos: ' . mysqli_error($conecta);
+            exit();
+        }
+
         // Mostrar mensaje de éxito
-        echo '<script>alert("¡Pedidos enviados al repartidor correctamente!");</script>';
+        echo '<script>alert("¡Pedidos enviados y eliminados correctamente!");</script>';
     } else {
-        // Si no se enviaron cantidades
         echo '<script>alert("No se han recibido cantidades para enviar.");</script>';
     }
-} else {
-    // Si no se presionó el botón
-    echo 'Opción no editable seleccionada.';
 }
 
+// Redirigir de vuelta a administra.php
+echo '<script>window.location.href = "../administra.php";</script>';
+exit();
 ?>

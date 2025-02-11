@@ -14,4 +14,6 @@ if (mysqli_query($conecta, $query1) && mysqli_query($conecta, $query2)) {
 } else {
     echo "Error al eliminar pedidos: " . mysqli_error($conecta);
 }
+echo '<script>window.location.href = "../administra.php";</script>';
+exit();
 ?>

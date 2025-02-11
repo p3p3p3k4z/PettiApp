@@ -52,7 +52,7 @@ if ($tipo == 'editable') {
             echo '<td class="px-6 py-4">' . $row['codigo'] . '</td>';
             echo '<td class="px-6 py-4">' . $row['nombre'] . '</td>';
             echo '<td class="px-6 py-4">
-                    <input type="number" name="cantidad[' . $row['id'] . ']" value="' . $row['cantidad'] . '" min="1" class="form-input border border-gray-300 rounded-md p-1" />
+                    <input type="number" name="cantidad[' . $row['id'] . ']" value="' . $row['cantidad'] . '" min="0" class="form-input border border-gray-300 rounded-md p-1" />
                   </td>';
             echo '<td class="px-6 py-4">' . $row['empleado'] . '</td>';
             echo '</tr>';

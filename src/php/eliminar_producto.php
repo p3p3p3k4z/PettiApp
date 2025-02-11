@@ -4,26 +4,19 @@ include '../conecta.php';
 
 // Verificar si se ha recibido el código del producto
 if (isset($_POST['codigo'])) {
-    $codigo = $_POST['codigo'];
+    $codigo = mysqli_real_escape_string($conecta, $_POST['codigo']); // Sanitizar entrada
 
-    // Consulta SQL para eliminar el producto de las tres tablas
-    $query = "
-        DELETE p, pf, pr
-        FROM pedido p
-        JOIN pedido_final pf ON p.codigo = pf.codigo
-        JOIN productos pr ON p.codigo = pr.codigo
-        WHERE p.codigo = '$codigo';
-    ";
+    // Eliminar el producto solo de la tabla 'pedido_final'
+    $delete_pedido_final = "DELETE FROM pedido_final WHERE codigo = '$codigo'";
 
-    // Ejecutar la consulta
-    if (mysqli_query($conecta, $query)) {
-        // Si la eliminación fue exitosa, redirigir o enviar un mensaje
-        echo 'Elimado de productos, pedido y pedido_final';
+    if (mysqli_query($conecta, $delete_pedido_final)) {
+        echo 'Producto eliminado de pedido_final correctamente.';
     } else {
-        // Si hubo un error al eliminar el producto
-        echo 'Error al eliminar el producto: ' . mysqli_error($conecta);
+        echo 'Error al eliminar en pedido_final: ' . mysqli_error($conecta);
     }
 } else {
     echo 'Código no recibido.';
 }
+echo '<script>window.location.href = "../administra.php";</script>';
+exit();
 ?>
