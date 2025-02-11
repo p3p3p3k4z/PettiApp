@@ -2,7 +2,29 @@
 Esta es una aplicacion web dedicada a administrar la lista de insumos para la cafeteria Petirrojo. En donde los trabajadores podran enlistas los insumos faltantes, consultar los insumos actuales, checar los detalles de los insumos.
 Asi mismo este es un proyecto para las materias de Ing.Software/ProgramacionWeb.
 
+---
+
+### Sobre el proyecto:
 ![inicio pagina](./info_proyecto/capturas/inicio.png)
+El personal del negocio podra acceder el sistema de forma simple
+
+![sesion](./info_proyecto/capturas/iniciosesion.png)
+![Registro](./info_proyecto/capturas/registro.png)
+
+Podran Registrarse e inicar sesion
+
+![Lista](./info_proyecto/capturas/lista.png)
+Alo largo de la jornada los empleados podran registrar los insumos faltantes y los podran solicitar
+
+![Tablero](./info_proyecto/capturas/tablero.jpeg)
+Los empleados tendran notas y todolist, para interactuar entre ellos
+
+
+![Admin](./info_proyecto/capturas/admin.png)
+El administrador tendra manejara la lista y la autorizara
+
+![Repartidor](./info_proyecto/capturas/repartidor.png)
+El repartidor podra surtir los insumos faltantes
 
 ---
 
