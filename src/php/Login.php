@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($data['phone']) && isset($dat
             // Determinar la URL de redirección
             $redirectUrl = match ($user['area']) {
                 'barra' => './ventana.php',
+                'cocina' => './ventana_cocina.php',
                 'admin' => './administra.php',
                 'repartidor' => './repartidor.php',
                 default => 'index.html'

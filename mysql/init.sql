@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS empleados (
     phone VARCHAR(10) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     nombre VARCHAR(100) NOT NULL,
-    area ENUM('barra', 'admin', 'repartidor') NOT NULL
+    area ENUM('barra', 'cocina', 'admin', 'repartidor') NOT NULL
 );
 
 INSERT INTO empleados (phone, password, nombre, area) VALUES
