@@ -21,6 +21,25 @@ include 'conecta.php';
     <title>Ventana Administrador</title>
     <link rel="stylesheet" href="css/ventana_admin.css"> 
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+    <!-- Estilos personalizados para el botón de cerrar sesión -->
+    <style>
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ff4444; /* Color de fondo */
+            color: white; /* Color del texto */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .logout-btn:hover {
+            background-color: #cc0000; /* Cambia el color al pasar el ratón */
+        }
+    </style>
 </head>
 <body>
      <!-- Sección de bienvenida, logo y usuario-->
@@ -36,7 +55,8 @@ include 'conecta.php';
             TRUISTAN
           </span>
         </div>
-
+        <!-- Botón de cerrar sesión -->
+        <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
       </div>
     </nav>
   </div>
@@ -118,7 +138,11 @@ function cargarLista(tipo) {
     xhr.send();
 }
 
-
+// Función para cerrar sesión
+function logout() {
+    // Redirigir a index.html
+    window.location.href = "index.html";
+}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

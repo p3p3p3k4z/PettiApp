@@ -27,6 +27,7 @@
       font-size: 2rem;
       color: #ffffff; /* Texto blanco */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative; /* Para posicionar el botón de cerrar sesión */
     }
     header img {
       width: 60px;
@@ -90,12 +91,31 @@
     .regresar a:hover {
       color: #922C40; /* Rojo oscuro al pasar el cursor */
     }
+    /* Estilos para el botón de cerrar sesión */
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #ff4444; /* Color de fondo */
+      color: white; /* Color del texto */
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+    .logout-btn:hover {
+      background-color: #cc0000; /* Cambia el color al pasar el ratón */
+    }
   </style>
 </head>
 <body>
   <header>
     <img src="https://app.petirrojo.mx/ci/uploads/apppetirrojo/logos/logo_header_mini.png" alt="Logo PetiApp">
     Gestion de Insumos
+    <!-- Botón de cerrar sesión -->
+    <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
   </header>
 
   <div class="menu">
@@ -127,5 +147,18 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script para cerrar sesión -->
+  <script>
+    function logout() {
+      // Redirigir a index.html
+      window.location.href = "index.html";
+    }
+  </script>
 </body>
 </html>
+
+
+
+
+

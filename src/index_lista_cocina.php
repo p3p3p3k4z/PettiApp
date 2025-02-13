@@ -1,15 +1,13 @@
 <?php
-// Configuración de conexión a la base de datos en Docker
-$servername = "db"; // Nombre del servicio en docker-compose.yml
-$username = "user"; // Usuario definido en docker-compose.yml
-$password = "password"; // Contraseña definida en docker-compose.yml
-$database = "insumos"; // Base de datos creada en docker-compose.yml
+      
+#error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
+// Conexión a la base de datos
+include 'conecta.php';
+
+// Crear tabla "pedido" si no existe
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Crear tabla "pedido_cocina" si no existe
     $createTableQuery = "
         CREATE TABLE IF NOT EXISTS pedido_cocina (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,45 +17,55 @@ try {
             cantidad VARCHAR(255),
             empleado VARCHAR(255)
         )";
-    $conn->exec($createTableQuery);
-
-    // Consulta para obtener los productos de cocina
-    $query = "SELECT codigo, nombre, categoria FROM productos_cocina";
-    $stmt = $conn->prepare($query);
-    $stmt->execute();
-    $productos_cocina = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Si se presionó el botón "Generar Lista"
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Decodificar los datos JSON recibidos
-        $data = json_decode(file_get_contents('php://input'), true);
-        $pedido_cocina = $data['pedido'];
-        $empleado = $data['empleado'];
-
-        // Insertar los productos con cantidades en la tabla "pedido_cocina"
-        $conn->exec("DELETE FROM pedido_cocina"); // Limpia la tabla antes de insertar
-        $insertQuery = "INSERT INTO pedido_cocina (codigo, nombre, categoria, cantidad, empleado) VALUES (:codigo, :nombre, :categoria, :cantidad, :empleado)";
-        $stmt = $conn->prepare($insertQuery);
-
-        foreach ($pedido_cocina as $item) {
-            $stmt->execute([
-                ':codigo' => $item['codigo'],
-                ':nombre' => $item['nombre'],
-                ':categoria' => $item['categoria'],
-                ':cantidad' => $item['cantidad'],
-                ':empleado' => $empleado
-            ]);
-        }
-
-        // Responder con un mensaje de éxito
-        echo json_encode(["message" => "Lista generada correctamente por: " . $empleado]);
-        exit();
-    }
-} catch (PDOException $e) {
-    echo json_encode(["error" => "Error al conectar a la base de datos: " . $e->getMessage()]);
-    exit();
+    $conecta->query($createTableQuery);
+} catch (mysqli_sql_exception $e) {
+    die(json_encode(["error" => "Error en la creación de la tabla: " . $e->getMessage()]));
 }
+
+// Consulta para obtener los productos
+$query = "SELECT codigo, nombre, categoria, empleado FROM productos_cocina";
+$resultado = $conecta->query($query);
+
+$productos = [];
+while ($row = $resultado->fetch_assoc()) { 
+    $productos[] = $row;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $data = json_decode(file_get_contents("php://input"), true);
+
+  $pedido = $data['pedido'] ?? [];
+  $empleado = $data['empleado'] ?? '';
+
+  if (empty($empleado) || empty($pedido)) {
+      echo json_encode(["error" => "Faltan datos", "debug" => $data]);
+      exit();
+  }
+
+  // 🔹 BORRAR TODOS LOS REGISTROS DE LA TABLA "productos"
+  $conecta->query("DELETE FROM productos_cocina");
+
+  $insertQuery = "INSERT INTO pedido_cocina (codigo, nombre, categoria, cantidad, empleado) 
+                  VALUES (?, ?, ?, ?, ?)";
+  $stmt = $conecta->prepare($insertQuery);
+
+  foreach ($pedido as $item) {
+      $stmt->bind_param("sssss", $item['codigo'], $item['nombre'], $item['categoria'], $item['cantidad'], $empleado);
+      if (!$stmt->execute()) {
+          echo json_encode(["error" => "Error al insertar el producto", "detalle" => $stmt->error]);
+          exit();
+      }
+  }
+
+  echo json_encode(["message" => "Lista generada correctamente por: " . $empleado]);
+  exit();
+}
+
+
+// Si la solicitud no es POST, el código sigue y carga el HTML
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -196,7 +204,7 @@ try {
 
     <!-- Botón para regresar al inicio -->
     <div class="text-center mt-4">
-      <a href="ventana.php" class="btn btn-cafe">
+      <a href="ventana_cocina.php" class="btn btn-cafe">
         <i class="bi bi-house-heart"></i> Regresar al Inicio
       </a>
     </div>
@@ -234,47 +242,56 @@ try {
     });
 
     // Generar la lista y enviarla al servidor
-    // Generar la lista y enviarla al servidor
     document.getElementById('confirmarGenerar').addEventListener('click', () => {
-        const empleado = document.getElementById('empleadoNombre').value.trim(); // Obtener el nombre del empleado
-        if (!empleado) {
-            alert("Por favor, ingrese su nombre.");
-            return;
+    const empleado = document.getElementById('empleadoNombre').value.trim();
+    if (!empleado) {
+        alert("Por favor, ingrese su nombre.");
+        return;
+    }
+
+    const rows = document.querySelectorAll('.product-row');
+    const pedido = Array.from(rows).map(row => ({
+        codigo: row.dataset.codigo,
+        nombre: row.dataset.nombre,
+        categoria: row.dataset.categoria,
+        cantidad: row.querySelector('.quantity-input').value.trim()
+    })).filter(item => item.cantidad !== "");
+
+    if (pedido.length === 0) {
+        alert("Debe ingresar la cantidad para al menos un producto.");
+        return;
+    }
+
+    const requestData = {
+        empleado: empleado,
+        pedido: pedido
+    };
+
+    console.log("Datos enviados:", requestData); // ✅ Verifica en la consola
+
+    fetch('index_lista_cocina.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Respuesta del servidor:", data); // ✅ Depuración
+
+        if (data.error) {
+            alert("Error: " + data.error);
+        } else {
+            alert(data.message);
+
+            window.location.reload();
         }
+    })
+    .catch(error => console.error("Error en la petición:", error));
+});
 
-        const rows = document.querySelectorAll('.product-row'); // Obtener todas las filas de productos
-        const pedido_cocina = Array.from(rows).map(row => ({
-            codigo: row.dataset.codigo,
-            nombre: row.dataset.nombre,
-            categoria: row.dataset.categoria,
-            cantidad: row.querySelector('.quantity-input').value.trim()
-        })).filter(item => item.cantidad !== ""); // Filtrar solo los productos con cantidad ingresada
 
-        // Validar que al menos un producto tenga cantidad ingresada
-        if (pedido_cocina.length === 0) {
-            alert("Debe ingresar la cantidad para al menos un producto.");
-            return;
-        }
-
-        // Enviar los datos al servidor usando fetch
-        fetch('index_lista.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' // Indicar que se envía JSON
-            },
-            body: JSON.stringify({ pedido_cocina, empleado }) // Enviar los datos como JSON
-        })
-        .then(response => response.json()) // Leer la respuesta como JSON
-        .then(data => {
-            if (data.error) {
-                alert(data.error); // Mostrar error si existe
-            } else {
-                alert(data.message); // Mostrar mensaje de éxito
-                window.location.reload(); // Recargar la página
-            }
-        })
-        .catch(error => console.error("Error:", error)); // Manejar errores
-    });
 
     // Mostrar/ocultar el menú desplegable
     document.addEventListener("DOMContentLoaded", function () {

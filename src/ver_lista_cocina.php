@@ -19,17 +19,17 @@ try {
     // Filtrar por categoría si se ha seleccionado una
     $categoria_seleccionada = isset($_GET['categoria']) ? $_GET['categoria'] : '';
 
-    $query_pedido_cocina = "SELECT * FROM pedido_cocina";
+    $query_pedidos = "SELECT * FROM pedido_cocina";
     if (!empty($categoria_seleccionada)) {
-        $query_pedido_cocina .= " WHERE categoria = :categoria";
+        $query_pedidos .= " WHERE categoria = :categoria";
     }
 
-    $stmt_pedido_cocina= $conn->prepare($query_pedido_cocina);
+    $stmt_pedidos = $conn->prepare($query_pedidos);
     if (!empty($categoria_seleccionada)) {
-        $stmt_pedido_cocina->bindParam(':categoria', $categoria_seleccionada);
+        $stmt_pedidos->bindParam(':categoria', $categoria_seleccionada);
     }
-    $stmt_pedido_cocina->execute();
-    $pedido_cocina = $stmt_pedido_cocina>fetchAll(PDO::FETCH_ASSOC);
+    $stmt_pedidos->execute();
+    $pedidos = $stmt_pedidos->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
     echo "Error al conectar a la base de datos: " . $e->getMessage();
@@ -112,7 +112,7 @@ try {
             <option value="">Todas</option>
             <?php
             // Obtener categorías únicas de la tabla
-            $query = "SELECT DISTINCT categoria FROM pedido_cocina";
+            $query = "SELECT DISTINCT categoria FROM pedido";
             $stmt = $conn->prepare($query);
             $stmt->execute();
             $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -135,12 +135,12 @@ try {
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($pedidos as $pedido_cocina): ?>
-                <tr data-categoria="<?= htmlspecialchars($pedido_cocina['categoria']) ?>">
-                    <td><?= htmlspecialchars($pedido_cocina['codigo']) ?></td>
-                    <td><?= htmlspecialchars($pedido_cocina['nombre']) ?></td>
-                    <td><?= htmlspecialchars($pedpedido_cocinaido['cantidad']) ?></td>
-                    <td><?= htmlspecialchars($pedido_cocina['empleado']) ?></td>
+            <?php foreach ($pedidos as $pedido): ?>
+                <tr data-categoria="<?= htmlspecialchars($pedido['categoria']) ?>">
+                    <td><?= htmlspecialchars($pedido['codigo']) ?></td>
+                    <td><?= htmlspecialchars($pedido['nombre']) ?></td>
+                    <td><?= htmlspecialchars($pedido['cantidad']) ?></td>
+                    <td><?= htmlspecialchars($pedido['empleado']) ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -148,7 +148,7 @@ try {
 
     <!-- Botón de regreso -->
     <div class="text-center mt-4">
-        <a href="ventana.php" class="btn btn-cafe">
+        <a href="ventana_cocina.php" class="btn btn-cafe">
             <i class="bi bi-house-heart"></i> Regresar al Inicio
         </a>
     </div>
